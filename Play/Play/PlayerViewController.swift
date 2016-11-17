@@ -134,7 +134,23 @@ class PlayerViewController: UIViewController {
         let clientID = NSDictionary(contentsOfFile: path!)?.value(forKey: "client_id") as! String
         let track = tracks[currentIndex]
         let url = URL(string: "https://api.soundcloud.com/tracks/\(track.id as Int)/stream?client_id=\(clientID)")!
-        // FILL ME IN
+        if (paused == true) {
+            let currentImage = UIImage(named: "pause")?.withRenderingMode(.alwaysTemplate)
+            playPauseButton.setImage(currentImage, for: UIControlState.normal)
+            
+            player.pause()
+            paused = false
+        } else {
+            let currentImage = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
+            playPauseButton.setImage(currentImage, for: UIControlState.normal)
+            if (player.items().count == 0 || player.rate > 0) {
+                let item:AVPlayerItem = AVPlayerItem(url: url)
+                player.replaceCurrentItem(with: item)
+            }
+            player.play()
+            paused = true
+        }
+        loadTrackElements()
 
     }
 
@@ -145,7 +161,15 @@ class PlayerViewController: UIViewController {
      * Remember to update the currentIndex
      */
     func nextTrackTapped(_ sender: UIButton) {
-        // FILL ME IN
+        self.currentIndex = self.currentIndex! + 1
+        loadTrackElements()
+        let track = tracks[currentIndex]
+        let url = URL(string: "https://api.soundcloud.com/tracks/\(track.id as Int)/stream?client_id=\(clientID)")
+        if (player.items().count == 0 || player.rate > 0) {
+            let item:AVPlayerItem = AVPlayerItem(url: url)
+            player.replaceCurrentItem(with: item)
+        }
+        player.play()
     }
 
     /*
@@ -159,7 +183,17 @@ class PlayerViewController: UIViewController {
      */
 
     func previousTrackTapped(_ sender: UIButton) {
-        // FILL ME IN
+        
+            currentIndex! -= 1
+            let track = tracks[currentIndex]
+            let url = URL(string: "https://api.soundcloud.com/tracks/\(track.id as Int)/stream?client_id=\(clientID)")
+        if (player.items().count == 0 || player.rate > 0) {
+            let item:AVPlayerItem = AVPlayerItem(url: url)
+            player.replaceCurrentItem(with: item)
+        }
+        player.play()
+        }
+        loadTrackElements()
     }
 
 
