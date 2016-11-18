@@ -164,7 +164,7 @@ class PlayerViewController: UIViewController {
     func nextTrackTapped(_ sender: UIButton) {
         let trackNum = currentIndex + 1
     
-        if trackNum <= tracks.count {
+        if trackNum < tracks.count {
             currentIndex = currentIndex + 1
             let path = Bundle.main.path(forResource: "Info", ofType: "plist")
             let clientID = NSDictionary(contentsOfFile: path!)?.value(forKey: "client_id") as! String
