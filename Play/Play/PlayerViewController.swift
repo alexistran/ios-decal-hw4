@@ -141,13 +141,11 @@ class PlayerViewController: UIViewController {
             let currentImage = UIImage(named: "pause")?.withRenderingMode(.alwaysTemplate)
             playPauseButton.setImage(currentImage, for: UIControlState.normal)
             paused = false
-//            
             player.play()
 
         } else {
             let currentImage = UIImage(named: "play")?.withRenderingMode(.alwaysTemplate)
             playPauseButton.setImage(currentImage, for: UIControlState.normal)
-
             player.pause()
             paused = true
         }
@@ -172,7 +170,6 @@ class PlayerViewController: UIViewController {
             let url = URL(string: "https://api.soundcloud.com/tracks/\(track.id as Int)/stream?client_id=\(clientID)")!
             let song = AVPlayerItem(url: url)
             player.replaceCurrentItem(with: song)
-            //player.advanceToNextItem()
             if (paused == false) {
                 player.play()
             }
