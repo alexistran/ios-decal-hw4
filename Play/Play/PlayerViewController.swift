@@ -162,15 +162,6 @@ class PlayerViewController: UIViewController {
      * Remember to update the currentIndex
      */
     func nextTrackTapped(_ sender: UIButton) {
-//        self.currentIndex = self.currentIndex! + 1
-//        loadTrackElements()
-//        let track = tracks[currentIndex]
-//        let url = URL(string: "https://api.soundcloud.com/tracks/\(track.id as Int)/stream?client_id=\(clientID)")
-//        if (player.items().count == 0 || player.rate > 0) {
-//            let item:AVPlayerItem = AVPlayerItem(url: url)
-//            player.replaceCurrentItem(with: item)
-//        }
-//        player.play()
         let trackNum = currentIndex + 1
     
         if trackNum <= tracks.count {
